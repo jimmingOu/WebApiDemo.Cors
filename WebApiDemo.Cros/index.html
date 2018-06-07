@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>WebClient</title>
+	<meta charset="utf-8" />
+    <script src="Scripts/jquery-2.2.4.js"></script>
+</head>
+<body>
+    <div>
+        URL : <input id="urlText" type="text" value="" size="50" />
+        <p>
+        <select id="method">
+            <option value="get">GET</option>
+            <option value="post">POST</option>
+            <option value="put">PUT</option>
+        </select>
+        <p>
+        <input type="button" value="Try it" onclick="sendRequest()" />
+        <p>
+        <span id='value1'>(Result)</span>
+    </div>
+
+    <script>
+
+    function sendRequest() {
+        var method = $('#method').val();
+        $.ajax({
+            type: method,
+            url: urlText.value,
+        }).done(function (data) {
+            $('#value1').text(data);
+        }).error(function (jqXHR, textStatus, errorThrown) {
+            $('#value1').text(jqXHR.responseText || textStatus);
+        });
+    }
+    </script>
+</body>
+</html>
